@@ -6,7 +6,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 10, 1000);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = true; // Enable shadow map
 document.body.appendChild(renderer.domElement);
 
 let textMesh;
@@ -18,12 +18,12 @@ particles();
 
 function lighting() {
   const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
-  hemisphereLight.castShadow = true;
+  hemisphereLight.castShadow = true; // Enable shadow casting
   scene.add(hemisphereLight);
 
   const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   directionalLight.position.set(0, 50, 0);
-  directionalLight.castShadow = true;
+  directionalLight.castShadow = true; // Enable shadow casting
   scene.add(directionalLight);
 
   const ambientLight = new THREE.AmbientLight(0x404040);
@@ -70,15 +70,16 @@ function text() {
 
     if (!textMesh) {
       textMesh = new THREE.Mesh(textGeometry, textMaterial);
-      textMesh.castShadow = true; 
-      textMesh.receiveShadow = true;
+      textMesh.castShadow = true; // Enable shadow casting
+      textMesh.receiveShadow = true; // Enable shadow receiving
       scene.add(textMesh);
     } else {
-
+      // If textMesh already exists, update its geometry and material
       textMesh.geometry = textGeometry;
       textMesh.material = textMaterial;
     }
 
+    // Set position after textMesh is created or updated
     textMesh.position.z = -5;
   });
 
